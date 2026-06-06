@@ -443,6 +443,10 @@ export interface OpenAICompletionsCompat {
   supportsPromptCacheKey?: boolean;
   /** Whether the provider supports long prompt cache retention (`prompt_cache_retention: "24h"` or Anthropic-style `cache_control.ttl: "1h"`, depending on format). Default: true. */
   supportsLongCacheRetention?: boolean;
+  /** Whether to strip OpenAI SDK diagnostic headers (`x-stainless-*`) before sending requests. Default: false. */
+  stripOpenAISdkHeaders?: boolean;
+  /** User-Agent value to send when `stripOpenAISdkHeaders` is enabled. */
+  openAISdkUserAgent?: string;
 }
 
 /** Compatibility settings for OpenAI Responses APIs. */
@@ -451,6 +455,10 @@ export interface OpenAIResponsesCompat {
   sendSessionIdHeader?: boolean;
   /** Whether the provider supports `prompt_cache_retention: "24h"`. Default: true. */
   supportsLongCacheRetention?: boolean;
+  /** Whether to strip OpenAI SDK diagnostic headers (`x-stainless-*`) before sending requests. Default: false. */
+  stripOpenAISdkHeaders?: boolean;
+  /** User-Agent value to send when `stripOpenAISdkHeaders` is enabled. */
+  openAISdkUserAgent?: string;
 }
 
 /** Compatibility settings for Anthropic Messages-compatible APIs. */

@@ -41,7 +41,12 @@ function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention 
   return "short";
 }
 
-function getCompat(model: Model<"openai-responses">): Required<OpenAIResponsesCompat> {
+type ResolvedOpenAIResponsesCompat = Omit<
+  Required<OpenAIResponsesCompat>,
+  "stripOpenAISdkHeaders" | "openAISdkUserAgent"
+>;
+
+function getCompat(model: Model<"openai-responses">): ResolvedOpenAIResponsesCompat {
   return {
     sendSessionIdHeader: model.compat?.sendSessionIdHeader ?? true,
     supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? true,
@@ -49,7 +54,7 @@ function getCompat(model: Model<"openai-responses">): Required<OpenAIResponsesCo
 }
 
 function getPromptCacheRetention(
-  compat: Required<OpenAIResponsesCompat>,
+  compat: ResolvedOpenAIResponsesCompat,
   cacheRetention: CacheRetention,
 ): "24h" | undefined {
   return cacheRetention === "long" && compat.supportsLongCacheRetention ? "24h" : undefined;

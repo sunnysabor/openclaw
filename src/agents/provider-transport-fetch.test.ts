@@ -203,6 +203,38 @@ describe("buildGuardedModelFetch", () => {
     });
   });
 
+  it("can strip OpenAI SDK stainless headers for compatible relay providers", async () => {
+    const model = {
+      id: "gpt-5.5",
+      provider: "sub2api",
+      api: "openai-responses",
+      baseUrl: "https://relay.example.com",
+      compat: {
+        stripOpenAISdkHeaders: true,
+        openAISdkUserAgent: "curl/8.5.0",
+      },
+    } as unknown as Model<"openai-responses">;
+
+    const fetcher = buildGuardedModelFetch(model);
+    await fetcher("https://relay.example.com/responses", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "User-Agent": "OpenAI/JS 6.39.1",
+        "x-stainless-lang": "js",
+        "x-stainless-package-version": "6.39.1",
+      },
+      body: '{"input":"hello"}',
+    });
+
+    const params = latestGuardedFetchParams();
+    const headers = new Headers((params.init as RequestInit | undefined)?.headers);
+    expect(headers.get("x-stainless-lang")).toBeNull();
+    expect(headers.get("x-stainless-package-version")).toBeNull();
+    expect(headers.get("user-agent")).toBe("curl/8.5.0");
+    expect(headers.get("content-type")).toBe("application/json");
+  });
+
   it("rejects successful streamed OpenAI-compatible responses with HTML content", async () => {
     const release = vi.fn(async () => undefined);
     const model = {

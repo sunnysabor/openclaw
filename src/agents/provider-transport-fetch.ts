@@ -712,6 +712,47 @@ function resolveModelTransportSsrFPolicy(params: {
   );
 }
 
+function shouldStripOpenAISdkHeaders(model: Model): boolean {
+  if (model.api !== "openai-completions" && model.api !== "openai-responses") {
+    return false;
+  }
+  const compat = model.compat as { stripOpenAISdkHeaders?: unknown } | undefined;
+  return compat?.stripOpenAISdkHeaders === true;
+}
+
+function resolveOpenAISdkUserAgent(model: Model): string | undefined {
+  const compat = model.compat as { openAISdkUserAgent?: unknown } | undefined;
+  const value = compat?.openAISdkUserAgent;
+  if (typeof value !== "string") {
+    return undefined;
+  }
+  const trimmed = value.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+function sanitizeOpenAISdkHeaders(
+  model: Model,
+  init: RequestInit | undefined,
+): RequestInit | undefined {
+  if (!shouldStripOpenAISdkHeaders(model)) {
+    return init;
+  }
+  const headers = new Headers(init?.headers);
+  for (const key of Array.from(headers.keys())) {
+    if (key.toLowerCase().startsWith("x-stainless-")) {
+      headers.delete(key);
+    }
+  }
+  const userAgent = resolveOpenAISdkUserAgent(model);
+  if (userAgent) {
+    headers.set("User-Agent", userAgent);
+  }
+  return {
+    ...init,
+    headers,
+  };
+}
+
 export function buildGuardedModelFetch(
   model: Model,
   timeoutMs?: number,
@@ -772,12 +813,13 @@ export function buildGuardedModelFetch(
         ...(request.body ? ({ duplex: "half" } as const) : {}),
       } satisfies RequestInit & { duplex?: "half" });
     const baseInit = requestInit ?? init;
+    const sanitizedInit = sanitizeOpenAISdkHeaders(model, baseInit);
     const synthesizeJsonAsSse = await requestBodyHasStreamTrue(request, baseInit);
-    const baseSignal = baseInit?.signal ?? undefined;
+    const baseSignal = sanitizedInit?.signal ?? undefined;
     const localServiceSignal = buildModelRequestSignal(baseSignal, requestTimeoutMs);
     const guardedFetchOptions = {
       url,
-      init: baseInit,
+      init: sanitizedInit,
       capture: {
         meta: {
           provider: model.provider,
@@ -806,7 +848,7 @@ export function buildGuardedModelFetch(
     try {
       localServiceLease = await ensureModelProviderLocalService(
         model,
-        baseInit?.headers,
+        sanitizedInit?.headers,
         localServiceSignal,
       );
       result = await fetchWithSsrFGuard(

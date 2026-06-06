@@ -93,7 +93,7 @@ interface OpenAICompatCacheControl {
 
 type ResolvedOpenAICompletionsCompat = Omit<
   Required<OpenAICompletionsCompat>,
-  "cacheControlFormat"
+  "cacheControlFormat" | "stripOpenAISdkHeaders" | "openAISdkUserAgent"
 > & {
   cacheControlFormat?: OpenAICompletionsCompat["cacheControlFormat"];
 };
