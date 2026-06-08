@@ -1,4 +1,4 @@
-// Control UI view renders ClawDesk workspace members and invites screen content.
+// Control UI view renders 龙虾工作台 workspace members and invites screen content.
 import { html } from "lit";
 import { cloudDeskApi } from "../cloud-desk-api.ts";
 import type { CloudDeskSnapshot } from "../cloud-desk-types.ts";

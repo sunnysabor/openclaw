@@ -1,4 +1,4 @@
-// Control UI view renders Cloud Desk login/register mock screen content.
+// Control UI view renders 龙虾工作台 login/register mock screen content.
 import { html } from "lit";
 import { cloudDeskApi } from "../cloud-desk-api.ts";
 import type { CloudDeskSnapshot } from "../cloud-desk-types.ts";
@@ -112,10 +112,8 @@ export function renderCloudAuth(
       <section class="card">
         <div class="section-header">
           <div>
-            <div class="card-title">Cloud Desk 登录</div>
-            <div class="card-sub">
-              面向国内用户的登录闭环：手机号验证码优先，微信扫码作为快捷路径。
-            </div>
+            <div class="card-title">琥格AI 登录</div>
+            <div class="card-sub">登录龙虾工作台：手机号验证码优先，微信扫码作为快捷路径。</div>
           </div>
           ${statusPill(account.status)}
         </div>
@@ -129,7 +127,7 @@ export function renderCloudAuth(
           >
             <div class="card-title">手机号验证码登录</div>
             <div class="card-sub" style="margin-top: 6px">
-              未注册手机号验证后自动创建 Cloud Desk 账号。
+              未注册手机号验证后自动创建琥格AI 账号。
             </div>
             <div class="settings-grid" style="margin-top: 16px">
               <label

@@ -1,4 +1,4 @@
-// Control UI Cloud Desk mock adapter.
+// Control UI 龙虾工作台 mock adapter.
 import { getSafeLocalStorage } from "../local-storage.ts";
 import type { CloudDeskSettings, CloudDeskSnapshot } from "./cloud-desk-types.ts";
 
@@ -7,8 +7,8 @@ const CLOUD_DESK_SETTINGS_KEY = "openclaw.control.cloudDesk.settings.v1";
 export const DEFAULT_CLOUD_DESK_SETTINGS: CloudDeskSettings = {
   enabled: true,
   mockMode: true,
-  apiBaseUrl: "mock://cloud-desk-api",
-  relayEndpoint: "https://relay.clouddesk.example/v1",
+  apiBaseUrl: "mock://lobster-workbench-api",
+  relayEndpoint: "https://relay.hugeai.example/v1",
 };
 
 const now = "2026-06-07T09:00:00+08:00";
@@ -16,34 +16,34 @@ const now = "2026-06-07T09:00:00+08:00";
 export const cloudDeskMockSnapshot: CloudDeskSnapshot = {
   auth: {
     mode: "login",
-    email: "demo@clouddesk.local",
+    email: "demo@hugeai.local",
     phoneCountryCode: "+86",
     phone: "13800138000",
     smsCode: "246810",
     verificationCode: "246810",
-    inviteCode: "CLAW-TEAM-2026",
+    inviteCode: "HUGEAI-TEAM-2026",
     wechat: {
-      qrCodeUrl: "mock://wechat-qr/clawdesk-login-demo",
+      qrCodeUrl: "mock://wechat-qr/hugeai-lobster-workbench-demo",
       status: "waiting",
       expiresAt: "2026-06-07T09:05:00+08:00",
     },
   },
   account: {
     userId: "user_demo_001",
-    email: "demo@clouddesk.local",
+    email: "demo@hugeai.local",
     phone: "13800138000",
-    nickname: "Demo User",
+    nickname: "琥格AI Demo",
     avatarUrl: null,
-    title: "Founder / workspace owner",
+    title: "创始人 / 工作区所有者",
     plan: "developer",
     status: "active",
     loginAt: now,
   },
   workspace: {
-    workspaceId: "ws_clawdesk_demo",
-    name: "ClawDesk Studio",
-    slug: "clawdesk-studio",
-    domain: "clouddesk.local",
+    workspaceId: "ws_hugeai_lobster_demo",
+    name: "琥格AI 龙虾工作台",
+    slug: "hugeai-lobster-workbench",
+    domain: "hugeai.local",
     ownerUserId: "user_demo_001",
     plan: "developer",
     memberLimit: 12,
@@ -53,8 +53,8 @@ export const cloudDeskMockSnapshot: CloudDeskSnapshot = {
     {
       memberId: "mem_001",
       userId: "user_demo_001",
-      name: "Demo User",
-      email: "demo@clouddesk.local",
+      name: "琥格AI Demo",
+      email: "demo@hugeai.local",
       role: "owner",
       status: "active",
       lastActiveAt: now,
@@ -87,8 +87,8 @@ export const cloudDeskMockSnapshot: CloudDeskSnapshot = {
       email: "engineer@example.com",
       role: "member",
       status: "pending",
-      invitedBy: "Demo User",
-      inviteUrl: "https://app.clawdesk.ai/invite/CLAW-TEAM-2026",
+      invitedBy: "琥格AI Demo",
+      inviteUrl: "https://app.clawdesk.ai/invite/HUGEAI-TEAM-2026",
       expiresAt: "2026-06-14T09:00:00+08:00",
       createdAt: now,
     },
@@ -97,7 +97,7 @@ export const cloudDeskMockSnapshot: CloudDeskSnapshot = {
       email: "advisor@example.com",
       role: "viewer",
       status: "expired",
-      invitedBy: "Demo User",
+      invitedBy: "琥格AI Demo",
       inviteUrl: "https://app.clawdesk.ai/invite/CLAW-ADVISOR-OLD",
       expiresAt: "2026-06-05T09:00:00+08:00",
       createdAt: "2026-05-29T09:00:00+08:00",
@@ -156,7 +156,7 @@ export const cloudDeskMockSnapshot: CloudDeskSnapshot = {
     },
   ],
   relay: {
-    endpoint: "https://relay.clouddesk.example/v1",
+    endpoint: "https://relay.hugeai.example/v1",
     apiKeyId: "rak_demo_001",
     apiKeyMasked: "cd-relay-****7KpQ",
     apiKeyStatus: "active",

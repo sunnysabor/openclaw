@@ -1,4 +1,4 @@
-// Control UI view renders Cloud Desk account screen content.
+// Control UI view renders 龙虾工作台 account screen content.
 import { html } from "lit";
 import { cloudDeskApi } from "../cloud-desk-api.ts";
 import type { CloudDeskSnapshot } from "../cloud-desk-types.ts";
@@ -19,12 +19,19 @@ export function renderCloudAccount(
     <div class="stack">
       ${renderMockNotice()}
       <div class="dashboard-grid">
-        ${renderMetricCard("云账户", account.nickname, `${account.email} · ${account.userId}`)}
+        ${renderMetricCard(
+          "琥格AI 云账户",
+          account.nickname,
+          `${account.email} · ${account.userId}`,
+        )}
         ${renderMetricCard("套餐", account.plan, `状态：${account.status}`)}
-        ${renderMetricCard("余额", formatCredits(billing.balanceCredits), "Cloud Desk 点数")}
+        ${renderMetricCard("余额", formatCredits(billing.balanceCredits), "琥格AI 点数")}
       </div>
       <section class="card">
-        <div class="card-title">云账户</div>
+        <div class="card-title">琥格AI 云账户</div>
+        <div class="card-sub">
+          龙虾工作台用于管理琥格AI 账号、套餐、点数与 Relay 权限；底层本机命令仍使用 openclaw。
+        </div>
         <div class="settings-grid" style="margin-top: 16px">
           <label>用户 ID<input readonly .value=${account.userId} /></label>
           <label>邮箱<input readonly .value=${account.email} /></label>

@@ -1254,7 +1254,7 @@ export class OpenClawApp extends LitElement {
           }
         },
         onTranscript: (entry) => {
-          this.realtimeTalkTranscript = `${entry.role === "user" ? "You" : "ClawDesk"}: ${entry.text}`;
+          this.realtimeTalkTranscript = `${entry.role === "user" ? "You" : "琥格AI"}: ${entry.text}`;
           this.realtimeTalkConversationState = updateRealtimeTalkConversation(
             this.realtimeTalkConversationState,
             entry,
@@ -1630,17 +1630,17 @@ export class OpenClawApp extends LitElement {
 
   saveCloudDeskSettingsDraft() {
     this.cloudDeskSettingsDraft = saveCloudDeskSettings(this.cloudDeskSettingsDraft);
-    this.cloudDeskSettingsMessage = { kind: "success", text: "Cloud Desk 配置已保存到本机。" };
+    this.cloudDeskSettingsMessage = { kind: "success", text: "龙虾工作台配置已保存到本机。" };
   }
 
   resetCloudDeskSettingsDraft() {
     this.cloudDeskSettingsDraft = resetCloudDeskSettings();
-    this.cloudDeskSettingsMessage = { kind: "success", text: "Cloud Desk 配置已恢复默认值。" };
+    this.cloudDeskSettingsMessage = { kind: "success", text: "龙虾工作台配置已恢复默认值。" };
   }
 
   async clearCloudDeskLoginMock() {
     await this.runCloudDeskAction(() => cloudDeskApi.logout());
-    this.cloudDeskSettingsMessage = { kind: "success", text: "Cloud Desk mock 登录态已清除。" };
+    this.cloudDeskSettingsMessage = { kind: "success", text: "龙虾工作台 mock 登录态已清除。" };
   }
 
   override render() {

@@ -1,4 +1,4 @@
-// Shared Cloud Desk UI helpers.
+// Shared 龙虾工作台 UI helpers.
 import { html, type TemplateResult } from "lit";
 
 const STATUS_LABELS: Record<string, string> = {
@@ -58,9 +58,9 @@ export function renderMockNotice(): TemplateResult {
       class="card"
       style="border-style: dashed; border-color: color-mix(in srgb, var(--accent, #7c3aed) 45%, transparent)"
     >
-      <div class="card-title">Cloud Desk Mock 模式</div>
+      <div class="card-title">龙虾工作台 Mock 模式</div>
       <div class="card-sub">
-        P0 前端预览。当前数据来自本地 mock adapter，暂未请求真实 Cloud Desk API。
+        P0 前端预览。当前数据来自本地 mock adapter，暂未请求真实 龙虾工作台 API。
       </div>
     </section>
   `;

@@ -2314,11 +2314,11 @@ export function renderApp(state: AppViewState) {
                       <img
                         class="sidebar-brand__logo"
                         src="${agentLogoUrl(basePath)}"
-                        alt="ClawDesk"
+                        alt="琥格AI"
                       />
                       <span class="sidebar-brand__copy">
                         <span class="sidebar-brand__eyebrow">${t("nav.control")}</span>
-                        <span class="sidebar-brand__title">ClawDesk</span>
+                        <span class="sidebar-brand__title">琥格AI</span>
                       </span>
                     `}
               </div>

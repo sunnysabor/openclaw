@@ -1,4 +1,4 @@
-// Control UI view renders ClawDesk profile/workspace screen content.
+// Control UI view renders 琥格AI profile/workspace screen content.
 import { html } from "lit";
 import { cloudDeskApi } from "../cloud-desk-api.ts";
 import type { CloudDeskSnapshot } from "../cloud-desk-types.ts";
@@ -27,7 +27,7 @@ export function renderCloudProfile(
         <div class="section-header">
           <div>
             <div class="card-title">用户资料</div>
-            <div class="card-sub">展示在 Cloud Desk 云服务与 Relay 账单中的个人身份。</div>
+            <div class="card-sub">展示在 琥格AI 云服务与 Relay 账单中的个人身份。</div>
           </div>
           ${statusPill(account.status)}
         </div>

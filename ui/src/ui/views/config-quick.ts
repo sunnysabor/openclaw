@@ -941,7 +941,7 @@ function renderPresetsCard(props: QuickSettingsProps) {
         <div class="qs-profiles__copy">
           <div class="qs-profiles__eyebrow">Bootstrap Context</div>
           <p class="qs-profiles__intro">
-            Choose how much workspace context ClawDesk injects into each run. These profiles do not
+            Choose how much workspace context 琥格AI injects into each run. These profiles do not
             change your model, tools, channels, or theme.
           </p>
           ${stateBanner}
@@ -1086,8 +1086,8 @@ function renderCloudDeskSettingsCard(props: QuickSettingsProps): TemplateResult 
   const settings: CloudDeskSettings = props.cloudDeskSettings ?? {
     enabled: true,
     mockMode: true,
-    apiBaseUrl: "mock://cloud-desk-api",
-    relayEndpoint: "https://relay.clouddesk.example/v1",
+    apiBaseUrl: "mock://lobster-workbench-api",
+    relayEndpoint: "https://relay.hugeai.example/v1",
   };
   const accountLabel = props.cloudDeskAccountEmail
     ? `${props.cloudDeskAccountEmail}${props.cloudDeskAccountStatus ? ` · ${props.cloudDeskAccountStatus}` : ""}`
@@ -1096,14 +1096,14 @@ function renderCloudDeskSettingsCard(props: QuickSettingsProps): TemplateResult 
     <section class="qs-card">
       <div class="qs-card__header">
         <div>
-          <h3>Cloud Desk 设置</h3>
-          <p>Web 控制台品牌与云端能力预留。CLI 命令仍然使用 openclaw。</p>
+          <h3>龙虾工作台设置</h3>
+          <p>琥格AI 的龙虾工作台云端能力预留。CLI 命令仍然使用 openclaw。</p>
         </div>
         <span class="qs-badge qs-badge--warn">${settings.mockMode ? "Mock" : "API"}</span>
       </div>
       <div class="settings-grid" style="margin-top: 12px">
         <label
-          >启用 Cloud Desk<input
+          >启用龙虾工作台<input
             type="checkbox"
             .checked=${settings.enabled}
             @change=${(event: Event) =>
@@ -1121,7 +1121,7 @@ function renderCloudDeskSettingsCard(props: QuickSettingsProps): TemplateResult 
               })}
         /></label>
         <label
-          >Cloud Desk API Base URL<input
+          >龙虾工作台 API Base URL<input
             .value=${settings.apiBaseUrl}
             @input=${(event: Event) =>
               props.onCloudDeskSettingsChange?.({
@@ -1141,11 +1141,11 @@ function renderCloudDeskSettingsCard(props: QuickSettingsProps): TemplateResult 
       </div>
       <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap">
         <button class="btn" @click=${() => props.onCloudDeskSettingsSave?.()}>
-          保存 Cloud Desk 配置
+          保存龙虾工作台配置
         </button>
         <button class="btn" @click=${() => props.onCloudDeskSettingsReset?.()}>恢复默认配置</button>
         <button class="btn danger" @click=${() => void props.onCloudDeskLoginClear?.()}>
-          清除 Cloud Desk 登录状态 Mock
+          清除龙虾工作台登录状态 Mock
         </button>
       </div>
       ${props.cloudDeskMessage

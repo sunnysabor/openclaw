@@ -467,12 +467,13 @@ export function renderOverview(props: OverviewProps) {
     <section class="card" style="margin-top: 16px">
       <div class="section-header">
         <div>
-          <div class="card-title">Cloud Desk</div>
-          <div class="card-sub">云账户、Relay 中转、账单和对账的 Mock 预览。</div>
+          <div class="card-title">龙虾工作台</div>
+          <div class="card-sub">
+            琥格AI 出品，基于 OpenClaw 二开的 Web 控制台；当前提供云账户、Relay 中转、账单和对账
+            Mock 预览。
+          </div>
         </div>
-        <button class="btn" @click=${() => props.onNavigate("cloudAccount")}>
-          打开 Cloud Desk
-        </button>
+        <button class="btn" @click=${() => props.onNavigate("cloudAccount")}>打开龙虾工作台</button>
       </div>
       ${(() => {
         const cloudDesk = cloudDeskApi.getCachedSnapshot();
@@ -482,7 +483,7 @@ export function renderOverview(props: OverviewProps) {
             ${renderMetricCard(
               "余额",
               formatCredits(cloudDesk.billing.balanceCredits),
-              "Cloud Desk 点数",
+              "琥格AI 点数",
             )}
             ${renderMetricCard(
               "Relay",
