@@ -8,6 +8,7 @@ import type { RealtimeTalkConversationEntry } from "./chat/realtime-talk-convers
 import type { RealtimeTalkStatus } from "./chat/realtime-talk.ts";
 import type { ChatRunUiStatus } from "./chat/run-lifecycle.ts";
 import type { ChatSideResult } from "./chat/side-result.ts";
+import type { CloudDeskSettings, CloudDeskSnapshot } from "./cloud-desk-types.ts";
 import type { CronModelSuggestionsState, CronState } from "./controllers/cron.ts";
 import type { DevicePairingList } from "./controllers/devices.ts";
 import type { ExecApprovalRequest } from "./controllers/exec-approval.ts";
@@ -258,6 +259,17 @@ export type AppViewState = {
   channelsLoading: boolean;
   channelsSnapshot: ChannelsStatusSnapshot | null;
   channelsError: string | null;
+  cloudDeskSnapshot: CloudDeskSnapshot;
+  cloudDeskLoading: boolean;
+  cloudDeskError: string | null;
+  cloudDeskSettingsDraft: CloudDeskSettings;
+  cloudDeskSettingsMessage: { kind: "success" | "error"; text: string } | null;
+  loadCloudDeskSnapshot: () => Promise<void>;
+  runCloudDeskAction: (action: () => Promise<unknown>) => Promise<void>;
+  updateCloudDeskSettingsDraft: (patch: Partial<CloudDeskSettings>) => void;
+  saveCloudDeskSettingsDraft: () => void;
+  resetCloudDeskSettingsDraft: () => void;
+  clearCloudDeskLoginMock: () => Promise<void>;
   channelsLastSuccess: number | null;
   whatsappLoginMessage: string | null;
   whatsappLoginQrDataUrl: string | null;

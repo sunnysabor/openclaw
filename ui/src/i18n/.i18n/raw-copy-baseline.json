@@ -41,7 +41,7 @@
       "kind": "html-text",
       "name": "text",
       "path": "ui/src/ui/app-render.ts",
-      "text": "OpenClaw"
+      "text": "ClawDesk"
     },
     {
       "count": 1,
@@ -444,10 +444,38 @@
     },
     {
       "count": 1,
+      "kind": "object-property",
+      "name": "description",
+      "path": "ui/src/ui/cloud-desk-api.ts",
+      "text": "claude-3.5-sonnet relay call"
+    },
+    {
+      "count": 1,
+      "kind": "object-property",
+      "name": "description",
+      "path": "ui/src/ui/cloud-desk-api.ts",
+      "text": "gpt-4.1 relay call"
+    },
+    {
+      "count": 1,
+      "kind": "object-property",
+      "name": "description",
+      "path": "ui/src/ui/cloud-desk-api.ts",
+      "text": "Mock recharge order paid"
+    },
+    {
+      "count": 1,
+      "kind": "object-property",
+      "name": "title",
+      "path": "ui/src/ui/cloud-desk-api.ts",
+      "text": "Founder / workspace owner"
+    },
+    {
+      "count": 1,
       "kind": "html-text",
       "name": "text",
       "path": "ui/src/ui/components/dashboard-header.ts",
-      "text": "OpenClaw"
+      "text": "ClawDesk"
     },
     {
       "count": 1,
@@ -490,6 +518,13 @@
       "name": "label",
       "path": "ui/src/ui/navigation.ts",
       "text": "chat"
+    },
+    {
+      "count": 1,
+      "kind": "object-property",
+      "name": "label",
+      "path": "ui/src/ui/navigation.ts",
+      "text": "cloudDesk"
     },
     {
       "count": 1,
@@ -1972,6 +2007,1035 @@
       "count": 1,
       "kind": "html-text",
       "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Buttons are visual only in P0.1."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Cloud Account"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Email"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Login time"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Mock actions"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Mock login"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Mock logout"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Nickname"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Phone"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Plan"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "Refresh account"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-account.ts",
+      "text": "User ID"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "6 位验证码"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "可选"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "你的名字"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "请输入手机号"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "you@company.com"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "把新用户注册、邀请加入 workspace、已有用户加入团队放在同一个登录闭环里。"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "登录 / 注册"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "登录即表示同意《服务协议》和《隐私政策》。真实实现需要短信限流、图形验证码、风控、session/JWT 交换。"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "短信验证码"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "国家/地区"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "后端接口预留"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "获取验证码"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "建议后续拆成：发送短信验证码、手机号登录/注册、创建微信登录二维码、轮询微信扫码状态、接受邀请、刷新 /me。"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "接受邀请并进入工作区"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "目标工作区"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "切换手机号登录"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "切换账号"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "稍后补充资料"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "使用微信扫一扫，确认后自动进入工作区。"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "手机号"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "手机号验证码登录"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "刷新二维码"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "微信扫码登录"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "未注册手机号验证后自动创建 ClawDesk 账号。"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "姓名 / 昵称"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "邀请链接"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "邀请码 / 邀请链接"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "邮箱补充资料"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "中国澳门 +853"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "中国大陆 +86"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "中国台湾 +886"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "中国香港 +852"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "注册与邀请接受"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "ClawDesk Login"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "Common China-friendly login flow: phone SMS code first, WeChat QR scan as the fast path."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-auth.ts",
+      "text": "United States +1"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Amount"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Balance after"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Cloud billing records from the mock adapter."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Create recharge order mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Created"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Description"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "ID"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Payment is intentionally not implemented in P0."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Query transactions"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Recent transactions"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Recharge order mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Session"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-billing.ts",
+      "text": "Type"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-desk-shared.ts",
+      "text": "Cloud Desk Mock Mode"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-desk-shared.ts",
+      "text": "P0.1 frontend preview. Data is provided by the local mock adapter and does not call a real Cloud Desk API yet."
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Search members"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "teammate@company.com"
+    },
+    {
+      "count": 2,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Actions"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "admin"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Copy"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Copy invite link"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Create invite mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Edit role"
+    },
+    {
+      "count": 3,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Email"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Expires"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Generate an invite link, assign a role, and let the user join this workspace."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Invite expires"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Invite link"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Invite users"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Invited by"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Invites"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Last active"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "member"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Members"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Name"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Regenerate link"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Resend"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Revoke"
+    },
+    {
+      "count": 3,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Role"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Role-based access preview for account, relay, billing, and workspace settings."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Send email mock"
+    },
+    {
+      "count": 2,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "Status"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-members.ts",
+      "text": "viewer"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Link phone later"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Change email mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Disable account mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Display name"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Domain"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Email"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Last login"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Personal identity shown across ClawDesk cloud and relay billing."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Phone"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Save profile mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Simple organization model for P0. Groups can be added after roles and billing ownership settle."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Slug"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Title"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "User ID"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "User profile"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Workspace ID"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Workspace name"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-profile.ts",
+      "text": "Workspace settings"
+    },
+    {
+      "count": 1,
+      "kind": "html-attribute",
+      "name": "placeholder",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Filter by session id"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Agent"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "all statuses"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Cloud charge"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "cloud_only"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Diff"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Input"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Local cost"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Local Usage vs Cloud Billing"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "local_only"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "matched"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "mismatch"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Model"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Output"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "P0 mock relationship between local model usage and cloud relay charges."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Relay request"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Session"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Status"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-reconciliation.ts",
+      "text": "Sync local usage mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Available models"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Context"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Create API Key mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Created at"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Endpoint"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Input / 1K"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Last used at"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Masked key"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Mock model list and rates."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Model"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Output / 1K"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Plaintext keys are only shown once by the future real API."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Provider"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Pull model list"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Relay API Key"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Reset API Key mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Revoke API Key mock"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Status"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/cloud-relay.ts",
+      "text": "Test Relay connection"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
       "path": "ui/src/ui/views/command-palette.ts",
       "text": "esc"
     },
@@ -2645,7 +3709,7 @@
       "kind": "html-text",
       "name": "text",
       "path": "ui/src/ui/views/config-quick.ts",
-      "text": "Choose how much workspace context OpenClaw injects into each run. These profiles do not change your model, tools, channels, or theme."
+      "text": "Choose how much workspace context ClawDesk injects into each run. These profiles do not change your model, tools, channels, or theme."
     },
     {
       "count": 1,
@@ -4038,7 +5102,7 @@
       "kind": "html-text",
       "name": "text",
       "path": "ui/src/ui/views/login-gate.ts",
-      "text": "OpenClaw"
+      "text": "ClawDesk"
     },
     {
       "count": 1,
@@ -4143,6 +5207,34 @@
       "kind": "html-text",
       "name": "text",
       "path": "ui/src/ui/views/mcp.ts",
+      "text": "openclaw mcp doctor --probe"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/mcp.ts",
+      "text": "openclaw mcp login &lt;name&gt;"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/mcp.ts",
+      "text": "openclaw mcp reload"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/mcp.ts",
+      "text": "openclaw mcp status --verbose"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/mcp.ts",
       "text": "Configured servers"
     },
     {
@@ -4179,34 +5271,6 @@
       "name": "text",
       "path": "ui/src/ui/views/mcp.ts",
       "text": "OAuth"
-    },
-    {
-      "count": 1,
-      "kind": "html-text",
-      "name": "text",
-      "path": "ui/src/ui/views/mcp.ts",
-      "text": "openclaw mcp doctor --probe"
-    },
-    {
-      "count": 1,
-      "kind": "html-text",
-      "name": "text",
-      "path": "ui/src/ui/views/mcp.ts",
-      "text": "openclaw mcp login &lt;name&gt;"
-    },
-    {
-      "count": 1,
-      "kind": "html-text",
-      "name": "text",
-      "path": "ui/src/ui/views/mcp.ts",
-      "text": "openclaw mcp reload"
-    },
-    {
-      "count": 1,
-      "kind": "html-text",
-      "name": "text",
-      "path": "ui/src/ui/views/mcp.ts",
-      "text": "openclaw mcp status --verbose"
     },
     {
       "count": 1,
@@ -4697,6 +5761,27 @@
       "name": "text",
       "path": "ui/src/ui/views/overview.ts",
       "text": "openclaw doctor --generate-gateway-token"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/overview.ts",
+      "text": "Cloud Desk"
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/overview.ts",
+      "text": "Mock cloud account, relay, billing, and reconciliation preview."
+    },
+    {
+      "count": 1,
+      "kind": "html-text",
+      "name": "text",
+      "path": "ui/src/ui/views/overview.ts",
+      "text": "Open Cloud Desk"
     },
     {
       "count": 1,

@@ -260,6 +260,14 @@ export const icons = {
       />
     </svg>
   `,
+  key: html`
+    <svg viewBox="0 0 24 24">
+      <circle cx="7.5" cy="15.5" r="5.5" />
+      <path d="m12 12 8-8" />
+      <path d="m16 8 2 2" />
+      <path d="m18 6 2 2" />
+    </svg>
+  `,
   globe: html`
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="10" />

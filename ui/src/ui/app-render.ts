@@ -191,6 +191,13 @@ import {
   sortLocaleStrings,
 } from "./views/agents-utils.ts";
 import { renderChat } from "./views/chat.ts";
+import { renderCloudAccount } from "./views/cloud-account.ts";
+import { renderCloudAuth } from "./views/cloud-auth.ts";
+import { renderCloudBilling } from "./views/cloud-billing.ts";
+import { renderCloudMembers } from "./views/cloud-members.ts";
+import { renderCloudProfile } from "./views/cloud-profile.ts";
+import { renderCloudReconciliation } from "./views/cloud-reconciliation.ts";
+import { renderCloudRelay } from "./views/cloud-relay.ts";
 import { renderCommandPalette } from "./views/command-palette.ts";
 import { getPresetById } from "./views/config-presets.ts";
 import { renderQuickSettings, type QuickSettingsChannel } from "./views/config-quick.ts";
@@ -1845,6 +1852,14 @@ export function renderApp(state: AppViewState) {
             onResetConfig: () => resetConfigPendingChanges(state),
             onSaveConfig: () => void saveConfig(state),
             onApplyConfig: () => void applyConfig(state),
+            cloudDeskSettings: state.cloudDeskSettingsDraft,
+            cloudDeskAccountEmail: state.cloudDeskSnapshot.account.email,
+            cloudDeskAccountStatus: state.cloudDeskSnapshot.account.status,
+            cloudDeskMessage: state.cloudDeskSettingsMessage,
+            onCloudDeskSettingsChange: (patch) => state.updateCloudDeskSettingsDraft(patch),
+            onCloudDeskSettingsSave: () => state.saveCloudDeskSettingsDraft(),
+            onCloudDeskSettingsReset: () => state.resetCloudDeskSettingsDraft(),
+            onCloudDeskLoginClear: () => void state.clearCloudDeskLoginMock(),
             onAdvancedSettings: () => {
               state.configSettingsMode = "advanced";
               requestHostUpdate?.();
@@ -2299,11 +2314,11 @@ export function renderApp(state: AppViewState) {
                       <img
                         class="sidebar-brand__logo"
                         src="${agentLogoUrl(basePath)}"
-                        alt="OpenClaw"
+                        alt="ClawDesk"
                       />
                       <span class="sidebar-brand__copy">
                         <span class="sidebar-brand__eyebrow">${t("nav.control")}</span>
-                        <span class="sidebar-brand__title">OpenClaw</span>
+                        <span class="sidebar-brand__title">ClawDesk</span>
                       </span>
                     `}
               </div>
@@ -2787,6 +2802,27 @@ export function renderApp(state: AppViewState) {
           : nothing}
         ${renderUsageTab(state, lazyUsage)}
         ${state.tab === "cron" ? renderCronQuickCreateForTab(state, requestHostUpdate) : nothing}
+        ${state.tab === "cloudAuth"
+          ? renderCloudAuth(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
+        ${state.tab === "cloudProfile"
+          ? renderCloudProfile(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
+        ${state.tab === "cloudMembers"
+          ? renderCloudMembers(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
+        ${state.tab === "cloudAccount"
+          ? renderCloudAccount(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
+        ${state.tab === "cloudBilling"
+          ? renderCloudBilling(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
+        ${state.tab === "cloudRelay"
+          ? renderCloudRelay(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
+        ${state.tab === "cloudReconciliation"
+          ? renderCloudReconciliation(state.cloudDeskSnapshot, state.runCloudDeskAction)
+          : nothing}
         ${state.tab === "cron"
           ? renderLazyView(lazyCron, (m) =>
               m.renderCron({

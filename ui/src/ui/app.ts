@@ -91,6 +91,13 @@ import {
 import type { ChatRunUiStatus } from "./chat/run-lifecycle.ts";
 import type { ChatSideResult } from "./chat/side-result.ts";
 import {
+  cloudDeskApi,
+  loadCloudDeskSettings,
+  resetCloudDeskSettings,
+  saveCloudDeskSettings,
+} from "./cloud-desk-api.ts";
+import type { CloudDeskSettings } from "./cloud-desk-types.ts";
+import {
   loadToolsEffective as loadToolsEffectiveInternal,
   refreshVisibleToolsEffectiveForCurrentSession as refreshVisibleToolsEffectiveForCurrentSessionInternal,
 } from "./controllers/agents.ts";
@@ -242,6 +249,11 @@ export class OpenClawApp extends LitElement {
   @state() allowExternalEmbedUrls = false;
   @state() chatMessageMaxWidth: string | null = null;
   @state() serverVersion: string | null = null;
+  @state() cloudDeskSnapshot = cloudDeskApi.getCachedSnapshot();
+  @state() cloudDeskLoading = false;
+  @state() cloudDeskError: string | null = null;
+  @state() cloudDeskSettingsDraft = loadCloudDeskSettings();
+  @state() cloudDeskSettingsMessage: { kind: "success" | "error"; text: string } | null = null;
 
   @state() sessionKey = this.settings.sessionKey;
   chatSessionMessageSubscriptionKey: string | null = null;
@@ -821,6 +833,7 @@ export class OpenClawApp extends LitElement {
     handleConnected(this as unknown as Parameters<typeof handleConnected>[0]);
     this.nativeBridgeCleanup = initNativeBridge(this);
     void this.initWebPushState();
+    void this.loadCloudDeskSnapshot();
   }
 
   protected override firstUpdated() {
@@ -1241,7 +1254,7 @@ export class OpenClawApp extends LitElement {
           }
         },
         onTranscript: (entry) => {
-          this.realtimeTalkTranscript = `${entry.role === "user" ? "You" : "OpenClaw"}: ${entry.text}`;
+          this.realtimeTalkTranscript = `${entry.role === "user" ? "You" : "ClawDesk"}: ${entry.text}`;
           this.realtimeTalkConversationState = updateRealtimeTalkConversation(
             this.realtimeTalkConversationState,
             entry,
@@ -1583,6 +1596,51 @@ export class OpenClawApp extends LitElement {
     } catch (err) {
       this.lastError = String(err);
     }
+  }
+
+  async loadCloudDeskSnapshot() {
+    this.cloudDeskLoading = true;
+    this.cloudDeskError = null;
+    try {
+      this.cloudDeskSnapshot = await cloudDeskApi.getSnapshot();
+    } catch (err) {
+      this.cloudDeskError = String(err);
+    } finally {
+      this.cloudDeskLoading = false;
+    }
+  }
+
+  async runCloudDeskAction(action: () => Promise<unknown>) {
+    this.cloudDeskLoading = true;
+    this.cloudDeskError = null;
+    try {
+      await action();
+      this.cloudDeskSnapshot = await cloudDeskApi.getSnapshot();
+    } catch (err) {
+      this.cloudDeskError = String(err);
+    } finally {
+      this.cloudDeskLoading = false;
+    }
+  }
+
+  updateCloudDeskSettingsDraft(patch: Partial<CloudDeskSettings>) {
+    this.cloudDeskSettingsDraft = { ...this.cloudDeskSettingsDraft, ...patch };
+    this.cloudDeskSettingsMessage = null;
+  }
+
+  saveCloudDeskSettingsDraft() {
+    this.cloudDeskSettingsDraft = saveCloudDeskSettings(this.cloudDeskSettingsDraft);
+    this.cloudDeskSettingsMessage = { kind: "success", text: "Cloud Desk 配置已保存到本机。" };
+  }
+
+  resetCloudDeskSettingsDraft() {
+    this.cloudDeskSettingsDraft = resetCloudDeskSettings();
+    this.cloudDeskSettingsMessage = { kind: "success", text: "Cloud Desk 配置已恢复默认值。" };
+  }
+
+  async clearCloudDeskLoginMock() {
+    await this.runCloudDeskAction(() => cloudDeskApi.logout());
+    this.cloudDeskSettingsMessage = { kind: "success", text: "Cloud Desk mock 登录态已清除。" };
   }
 
   override render() {

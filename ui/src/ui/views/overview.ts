@@ -2,6 +2,7 @@
 import { html, nothing } from "lit";
 import { t, i18n, SUPPORTED_LOCALES, type Locale, isSupportedLocale } from "../../i18n/index.ts";
 import type { EventLogEntry } from "../app-events.ts";
+import { cloudDeskApi } from "../cloud-desk-api.ts";
 import { buildExternalLinkRel, EXTERNAL_LINK_TARGET } from "../external-link.ts";
 import { formatRelativeTimestamp, formatDurationHuman } from "../format.ts";
 import type { GatewayHelloOk } from "../gateway.ts";
@@ -17,6 +18,7 @@ import type {
   SessionsUsageResult,
   SkillStatusReport,
 } from "../types.ts";
+import { formatCredits, renderMetricCard, statusPill } from "./cloud-desk-shared.ts";
 import { renderConnectCommand } from "./connect-command.ts";
 import { renderOverviewAttention } from "./overview-attention.ts";
 import { renderOverviewCards } from "./overview-cards.ts";
@@ -462,6 +464,44 @@ export function renderOverview(props: OverviewProps) {
       presenceCount: props.presenceCount,
       onNavigate: props.onNavigate,
     })}
+    <section class="card" style="margin-top: 16px">
+      <div class="section-header">
+        <div>
+          <div class="card-title">Cloud Desk</div>
+          <div class="card-sub">云账户、Relay 中转、账单和对账的 Mock 预览。</div>
+        </div>
+        <button class="btn" @click=${() => props.onNavigate("cloudAccount")}>
+          打开 Cloud Desk
+        </button>
+      </div>
+      ${(() => {
+        const cloudDesk = cloudDeskApi.getCachedSnapshot();
+        return html`
+          <div class="dashboard-grid" style="margin-top: 12px">
+            ${renderMetricCard("套餐", cloudDesk.account.plan, cloudDesk.account.email)}
+            ${renderMetricCard(
+              "余额",
+              formatCredits(cloudDesk.billing.balanceCredits),
+              "Cloud Desk 点数",
+            )}
+            ${renderMetricCard(
+              "Relay",
+              cloudDesk.relay.apiKeyMasked ?? "未创建",
+              cloudDesk.relay.endpoint,
+            )}
+            ${renderMetricCard(
+              "对账",
+              `${cloudDesk.reconciliation.filter((item) => item.status !== "matched").length} 项异常`,
+              "本地用量 vs 云端账单",
+            )}
+          </div>
+          <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap">
+            ${statusPill(cloudDesk.account.status)} ${statusPill(cloudDesk.relay.apiKeyStatus)}
+            ${statusPill(cloudDesk.relay.lastTest.status)}
+          </div>
+        `;
+      })()}
+    </section>
     ${renderOverviewAttention({ items: props.attentionItems })}
 
     <div class="ov-section-divider"></div>

@@ -9,6 +9,18 @@ export const TAB_GROUPS = [
     label: "control",
     tabs: ["overview", "activity", "workboard", "instances", "sessions", "usage", "cron"],
   },
+  {
+    label: "cloudDesk",
+    tabs: [
+      "cloudAuth",
+      "cloudProfile",
+      "cloudMembers",
+      "cloudAccount",
+      "cloudBilling",
+      "cloudRelay",
+      "cloudReconciliation",
+    ],
+  },
   { label: "agent", tabs: ["agents", "skills", "skillWorkshop", "nodes", "dreams"] },
   {
     label: "settings",
@@ -26,6 +38,13 @@ export type Tab =
   | "sessions"
   | "usage"
   | "cron"
+  | "cloudAuth"
+  | "cloudProfile"
+  | "cloudMembers"
+  | "cloudAccount"
+  | "cloudBilling"
+  | "cloudRelay"
+  | "cloudReconciliation"
   | "skills"
   | "skillWorkshop"
   | "nodes"
@@ -64,6 +83,13 @@ const TAB_PATHS: Record<Tab, string> = {
   sessions: "/sessions",
   usage: "/usage",
   cron: "/cron",
+  cloudAuth: "/cloud/auth",
+  cloudProfile: "/cloud/profile",
+  cloudMembers: "/cloud/members",
+  cloudAccount: "/cloud/account",
+  cloudBilling: "/cloud/billing",
+  cloudRelay: "/cloud/relay",
+  cloudReconciliation: "/cloud/reconciliation",
   skills: "/skills",
   skillWorkshop: "/skills/workshop",
   nodes: "/nodes",
@@ -219,6 +245,20 @@ export function iconForTab(tab: Tab): IconName {
       return "barChart";
     case "cron":
       return "loader";
+    case "cloudAuth":
+      return "key";
+    case "cloudProfile":
+      return "circle";
+    case "cloudMembers":
+      return "link";
+    case "cloudAccount":
+      return "globe";
+    case "cloudBilling":
+      return "barChart";
+    case "cloudRelay":
+      return "radio";
+    case "cloudReconciliation":
+      return "activity";
     case "skills":
       return "zap";
     case "skillWorkshop":

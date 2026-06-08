@@ -7,6 +7,7 @@
 
 import { html, nothing, type TemplateResult } from "lit";
 import { t } from "../../i18n/index.ts";
+import type { CloudDeskSettings } from "../cloud-desk-types.ts";
 import { icons } from "../icons.ts";
 import type { BorderRadiusStop, TextScaleStop } from "../storage.ts";
 import { normalizeOptionalString } from "../string-coerce.ts";
@@ -103,6 +104,15 @@ export type QuickSettingsProps = {
   onResetConfig?: () => void;
   onSaveConfig?: () => void;
   onApplyConfig?: () => void;
+
+  cloudDeskSettings?: CloudDeskSettings;
+  cloudDeskAccountEmail?: string | null;
+  cloudDeskAccountStatus?: string | null;
+  cloudDeskMessage?: { kind: "success" | "error"; text: string } | null;
+  onCloudDeskSettingsChange?: (patch: Partial<CloudDeskSettings>) => void;
+  onCloudDeskSettingsSave?: () => void;
+  onCloudDeskSettingsReset?: () => void;
+  onCloudDeskLoginClear?: () => void | Promise<void>;
 
   // Navigation
   onAdvancedSettings?: () => void;
@@ -931,7 +941,7 @@ function renderPresetsCard(props: QuickSettingsProps) {
         <div class="qs-profiles__copy">
           <div class="qs-profiles__eyebrow">Bootstrap Context</div>
           <p class="qs-profiles__intro">
-            Choose how much workspace context OpenClaw injects into each run. These profiles do not
+            Choose how much workspace context ClawDesk injects into each run. These profiles do not
             change your model, tools, channels, or theme.
           </p>
           ${stateBanner}
@@ -1072,6 +1082,88 @@ function renderConnectionFooter(props: QuickSettingsProps) {
   `;
 }
 
+function renderCloudDeskSettingsCard(props: QuickSettingsProps): TemplateResult {
+  const settings: CloudDeskSettings = props.cloudDeskSettings ?? {
+    enabled: true,
+    mockMode: true,
+    apiBaseUrl: "mock://cloud-desk-api",
+    relayEndpoint: "https://relay.clouddesk.example/v1",
+  };
+  const accountLabel = props.cloudDeskAccountEmail
+    ? `${props.cloudDeskAccountEmail}${props.cloudDeskAccountStatus ? ` · ${props.cloudDeskAccountStatus}` : ""}`
+    : "未登录";
+  return html`
+    <section class="qs-card">
+      <div class="qs-card__header">
+        <div>
+          <h3>Cloud Desk 设置</h3>
+          <p>Web 控制台品牌与云端能力预留。CLI 命令仍然使用 openclaw。</p>
+        </div>
+        <span class="qs-badge qs-badge--warn">${settings.mockMode ? "Mock" : "API"}</span>
+      </div>
+      <div class="settings-grid" style="margin-top: 12px">
+        <label
+          >启用 Cloud Desk<input
+            type="checkbox"
+            .checked=${settings.enabled}
+            @change=${(event: Event) =>
+              props.onCloudDeskSettingsChange?.({
+                enabled: (event.target as HTMLInputElement).checked,
+              })}
+        /></label>
+        <label
+          >Mock 模式<input
+            type="checkbox"
+            .checked=${settings.mockMode}
+            @change=${(event: Event) =>
+              props.onCloudDeskSettingsChange?.({
+                mockMode: (event.target as HTMLInputElement).checked,
+              })}
+        /></label>
+        <label
+          >Cloud Desk API Base URL<input
+            .value=${settings.apiBaseUrl}
+            @input=${(event: Event) =>
+              props.onCloudDeskSettingsChange?.({
+                apiBaseUrl: (event.target as HTMLInputElement).value,
+              })}
+        /></label>
+        <label
+          >Relay Endpoint<input
+            .value=${settings.relayEndpoint}
+            @input=${(event: Event) =>
+              props.onCloudDeskSettingsChange?.({
+                relayEndpoint: (event.target as HTMLInputElement).value,
+              })}
+        /></label>
+        <label>当前云账户<input readonly .value=${accountLabel} /></label>
+        <label>底层 CLI<input readonly .value=${"openclaw"} /></label>
+      </div>
+      <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap">
+        <button class="btn" @click=${() => props.onCloudDeskSettingsSave?.()}>
+          保存 Cloud Desk 配置
+        </button>
+        <button class="btn" @click=${() => props.onCloudDeskSettingsReset?.()}>恢复默认配置</button>
+        <button class="btn danger" @click=${() => void props.onCloudDeskLoginClear?.()}>
+          清除 Cloud Desk 登录状态 Mock
+        </button>
+      </div>
+      ${props.cloudDeskMessage
+        ? html`<p
+            class=${props.cloudDeskMessage.kind === "success" ? "pill success" : "pill danger"}
+            style="margin-top: 10px"
+          >
+            ${props.cloudDeskMessage.text}
+          </p>`
+        : nothing}
+      <p class="muted" style="margin-top: 10px">
+        P0 阶段配置保存在当前浏览器 localStorage；真实后端接入时仍经 cloudDeskApi adapter，不把 mock
+        数据散落到页面里。
+      </p>
+    </section>
+  `;
+}
+
 // ── Main render ──
 
 export function renderQuickSettings(props: QuickSettingsProps) {
@@ -1086,7 +1178,7 @@ export function renderQuickSettings(props: QuickSettingsProps) {
 
       <div class="qs-grid">
         ${renderModelCard(props)} ${renderChannelsCard(props)} ${renderSecurityCard(props)}
-        ${renderPersonalCard(props)}
+        ${renderPersonalCard(props)} ${renderCloudDeskSettingsCard(props)}
         <div class="qs-side-stack">
           ${renderAppearanceCard(props)} ${renderAutomationsCard(props)}
         </div>

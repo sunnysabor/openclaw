@@ -463,6 +463,16 @@ export function renderUsage(props: UsageProps) {
 
   return html`
     <div class="usage-page">
+      <section
+        class="card"
+        style="border-style: dashed; border-color: color-mix(in srgb, var(--accent, #7c3aed) 38%, transparent)"
+      >
+        <div class="card-title">Local Usage / 本地用量</div>
+        <div class="card-sub" style="margin-top: 8px; line-height: 1.6">
+          这里展示的是本机 OpenClaw 会话用量统计，用于排查模型调用、token 和本地估算成本；它不等同于
+          Cloud Desk 云端真实账单。云端扣费请以后端 Relay 交易流水和 Billing 页面为准。
+        </div>
+      </section>
       <section class="card usage-header ${display.headerPinned ? "pinned" : ""}">
         <div class="usage-header-row">
           <div class="usage-header-title">
@@ -526,7 +536,7 @@ export function renderUsage(props: UsageProps) {
                     class="usage-export-item"
                     @click=${() =>
                       downloadTextFile(
-                        `openclaw-usage-sessions-${exportStamp}.csv`,
+                        `clawdesk-usage-sessions-${exportStamp}.csv`,
                         buildSessionsCsv(filteredSessions),
                         "text/csv",
                       )}
@@ -538,7 +548,7 @@ export function renderUsage(props: UsageProps) {
                     class="usage-export-item"
                     @click=${() =>
                       downloadTextFile(
-                        `openclaw-usage-daily-${exportStamp}.csv`,
+                        `clawdesk-usage-daily-${exportStamp}.csv`,
                         buildDailyCsv(filteredDaily),
                         "text/csv",
                       )}
@@ -550,7 +560,7 @@ export function renderUsage(props: UsageProps) {
                     class="usage-export-item"
                     @click=${() =>
                       downloadTextFile(
-                        `openclaw-usage-${exportStamp}.json`,
+                        `clawdesk-usage-${exportStamp}.json`,
                         JSON.stringify(
                           {
                             totals: displayTotals,
