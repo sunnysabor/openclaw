@@ -252,6 +252,7 @@ export class OpenClawApp extends LitElement {
   @state() cloudDeskSnapshot = cloudDeskApi.getCachedSnapshot();
   @state() cloudDeskLoading = false;
   @state() cloudDeskError: string | null = null;
+  @state() pendingCloudDeskRedirectTab: Tab | null = null;
   @state() cloudDeskSettingsDraft = loadCloudDeskSettings();
   @state() cloudDeskSettingsMessage: { kind: "success" | "error"; text: string } | null = null;
 
@@ -1611,11 +1612,23 @@ export class OpenClawApp extends LitElement {
   }
 
   async runCloudDeskAction(action: () => Promise<unknown>) {
+    const previousStatus = this.cloudDeskSnapshot.account.status;
     this.cloudDeskLoading = true;
     this.cloudDeskError = null;
     try {
       await action();
       this.cloudDeskSnapshot = await cloudDeskApi.getSnapshot();
+      const nextStatus = this.cloudDeskSnapshot.account.status;
+      if (previousStatus !== "active" && nextStatus === "active") {
+        const nextTab = this.pendingCloudDeskRedirectTab ?? "overview";
+        this.pendingCloudDeskRedirectTab = null;
+        setTabInternal(this as never, nextTab);
+      } else if (previousStatus === "active" && nextStatus !== "active") {
+        this.pendingCloudDeskRedirectTab = null;
+        if (this.tab !== "cloudAuth") {
+          setTabInternal(this as never, "cloudAuth");
+        }
+      }
     } catch (err) {
       this.cloudDeskError = String(err);
     } finally {

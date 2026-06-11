@@ -7,6 +7,7 @@ import {
   applySettings,
   applySettingsFromUrl,
   setTabFromRoute,
+  syncTabWithLocation,
   syncThemeWithSettings,
 } from "./app-settings.ts";
 import type { ThemeMode, ThemeName } from "./theme.ts";
@@ -367,6 +368,35 @@ describe("applySettingsFromUrl", () => {
     expect(host.settings.token).toBe("hash-token");
     expect(window.location.search).toBe("");
     expect(window.location.hash).toBe("");
+  });
+
+  it("defaults the root route to cloudAuth when no tab is present", () => {
+    setTestWindowUrl("https://control.example/ui/");
+    const host = createHost("chat");
+
+    syncTabWithLocation(host as never, true);
+
+    expect(host.tab).toBe("cloudAuth" as never);
+  });
+
+  it("redirects direct chat routes to cloudAuth while logged out", () => {
+    const host = createHost("chat");
+    (
+      host as unknown as { cloudDeskSnapshot?: { account?: { status?: string } } }
+    ).cloudDeskSnapshot = {
+      account: { status: "inactive" },
+    };
+    (
+      host as unknown as { pendingCloudDeskRedirectTab?: string | null }
+    ).pendingCloudDeskRedirectTab = null;
+
+    setTabFromRoute(host as never, "chat" as never);
+
+    expect(host.tab).toBe("cloudAuth" as never);
+    expect(
+      (host as unknown as { pendingCloudDeskRedirectTab?: string | null })
+        .pendingCloudDeskRedirectTab,
+    ).toBe("chat");
   });
 
   it("hydrates native Mac app auth before the first connection", () => {

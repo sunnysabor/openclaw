@@ -1299,9 +1299,11 @@ export function renderApp(state: AppViewState) {
       : undefined;
   pendingUpdate = requestHostUpdate;
 
-  // Gate: require successful gateway connection before showing the dashboard.
+  // Most Control UI surfaces require a live Gateway connection first.
+  // Cloud Desk auth is a special-case frontend-first entry so users can land on
+  // username/password login without seeing the Gateway token/password gate.
   // The gateway URL confirmation overlay is always rendered so URL-param flows still work.
-  if (!state.connected) {
+  if (!state.connected && state.tab !== "cloudAuth") {
     return html` ${renderLoginGate(state)} ${renderGatewayUrlConfirmation(state)} `;
   }
 

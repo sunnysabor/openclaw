@@ -26,6 +26,11 @@ describe("Cloud Desk mock views", () => {
 
   it("renders auth state pages with SMS and WeChat mock flows", () => {
     const text = textOf(renderCloudAuth());
+    expect(text).toContain("账号密码登录");
+    expect(text).toContain("账号 / 邮箱");
+    expect(text).toContain("密码");
+    expect(text).toContain("忘记密码");
+    expect(text).toContain("注册账号");
     expect(text).toContain("手机号验证码登录");
     expect(text).toContain("微信扫码登录");
     expect(text).toContain("Mock 验证码：123456");

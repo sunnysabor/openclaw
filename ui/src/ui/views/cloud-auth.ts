@@ -2,12 +2,7 @@
 import { html } from "lit";
 import { cloudDeskApi } from "../cloud-desk-api.ts";
 import type { CloudDeskSnapshot } from "../cloud-desk-types.ts";
-import {
-  renderMetricCard,
-  renderMockNotice,
-  requestCloudDeskUpdate,
-  statusPill,
-} from "./cloud-desk-shared.ts";
+import { renderMockNotice, requestCloudDeskUpdate, statusPill } from "./cloud-desk-shared.ts";
 
 type SmsAuthState =
   | "idle"
@@ -19,6 +14,9 @@ type SmsAuthState =
 type WechatQrState = "waiting" | "scanned" | "confirmed" | "expired";
 
 const authUiState: {
+  passwordState: "idle" | "invalid" | "success";
+  email: string;
+  password: string;
   smsState: SmsAuthState;
   smsSecondsLeft: number;
   smsTimer: number | null;
@@ -26,6 +24,9 @@ const authUiState: {
   phone: string;
   code: string;
 } = {
+  passwordState: "idle",
+  email: cloudDeskApi.getCachedSnapshot().auth.email,
+  password: "",
   smsState: "idle",
   smsSecondsLeft: 0,
   smsTimer: null,
@@ -36,6 +37,17 @@ const authUiState: {
 
 function requestUpdate() {
   requestCloudDeskUpdate();
+}
+
+function accountPasswordMessage() {
+  switch (authUiState.passwordState) {
+    case "invalid":
+      return html`<div class="pill danger">请输入账号和密码。当前是前端 mock 登录。</div>`;
+    case "success":
+      return html`<div class="pill success">登录成功，正在进入工作区。</div>`;
+    default:
+      return html`<div class="muted">演示账号可直接输入任意非空邮箱和密码。</div>`;
+  }
 }
 
 function startSmsCountdown() {
@@ -98,28 +110,105 @@ export function renderCloudAuth(
   const pendingInvite = invites.find((invite) => invite.status === "pending");
   return html`
     <div class="stack">
-      ${renderMockNotice()}
-      <div class="dashboard-grid">
-        ${renderMetricCard(
-          "主要登录方式",
-          "手机号验证码",
-          `${auth.phoneCountryCode} ${authUiState.phone}`,
-        )}
-        ${renderMetricCard("微信扫码", wechatMessage(), `有效期：${auth.wechat.expiresAt}`)}
-        ${renderMetricCard("邀请入口", auth.inviteCode, pendingInvite?.email ?? "可选")}
-      </div>
-
       <section class="card">
         <div class="section-header">
           <div>
             <div class="card-title">琥格AI 登录</div>
-            <div class="card-sub">登录龙虾工作台：手机号验证码优先，微信扫码作为快捷路径。</div>
+            <div class="card-sub">
+              先用最简单的账号密码入口验证页面流程。手机号验证码、微信扫码和邀请接受暂时保留为 mock
+              次要入口。
+            </div>
           </div>
           ${statusPill(account.status)}
         </div>
 
+        <div style="max-width: 560px; margin-top: 20px">
+          <div
+            style="padding: 28px; border-radius: var(--radius-xl); background: linear-gradient(160deg, color-mix(in srgb, var(--panel, #111827) 92%, #0f172a 8%), color-mix(in srgb, white 8%, var(--panel, #111827) 92%)); border: 1px solid color-mix(in srgb, var(--accent, #7c3aed) 22%, transparent); box-shadow: 0 24px 80px rgba(15, 23, 42, 0.22)"
+          >
+            <div style="font-size: 14px; color: var(--muted, #94a3b8)">欢迎回来</div>
+            <div style="font-size: 32px; font-weight: 800; margin-top: 8px">账号密码登录</div>
+            <div class="card-sub" style="margin-top: 8px">
+              登录后进入控制台首页。当前仍是前端 mock 流程，用于先验证标准用户登录体验。
+            </div>
+            <div class="settings-grid" style="margin-top: 18px">
+              <label
+                >账号 / 邮箱<input
+                  type="email"
+                  placeholder="name@example.com"
+                  .value=${authUiState.email}
+                  @input=${(event: Event) => {
+                    authUiState.email = (event.target as HTMLInputElement).value;
+                  }}
+              /></label>
+              <label
+                >密码<input
+                  type="password"
+                  placeholder="请输入密码"
+                  .value=${authUiState.password}
+                  @input=${(event: Event) => {
+                    authUiState.password = (event.target as HTMLInputElement).value;
+                  }}
+              /></label>
+            </div>
+            <div style="margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap">
+              <button
+                class="btn primary"
+                style="min-width: 140px"
+                @click=${async () => {
+                  const email = authUiState.email.trim();
+                  const password = authUiState.password.trim();
+                  authUiState.passwordState =
+                    email.length > 0 && password.length > 0 ? "success" : "invalid";
+                  if (authUiState.passwordState === "success") {
+                    await run(() => cloudDeskApi.login());
+                  }
+                  requestUpdate();
+                }}
+              >
+                登录
+              </button>
+              <button
+                class="btn"
+                @click=${() => {
+                  authUiState.email = auth.email;
+                  authUiState.password = "";
+                  authUiState.passwordState = "idle";
+                  requestUpdate();
+                }}
+              >
+                清空
+              </button>
+            </div>
+            <div
+              style="margin-top: 14px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"
+            >
+              <button class="btn" style="padding-inline: 0; background: transparent">
+                忘记密码
+              </button>
+              <button class="btn" style="padding-inline: 0; background: transparent">
+                注册账号
+              </button>
+            </div>
+            <div style="margin-top: 12px">${accountPasswordMessage()}</div>
+            <div class="muted" style="margin-top: 16px">
+              示例工作区：${workspace.name} · 当前账号：${account.nickname}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <div class="card-title">其他登录方式</div>
+            <div class="card-sub">这些入口先保留为次要 mock 方式，不作为首屏主流程。</div>
+          </div>
+          <div class="muted">手机号验证码、微信扫码、邀请接受仍保留为 P0 mock 入口。</div>
+        </div>
+
         <div
-          style="display: grid; grid-template-columns: minmax(280px, 1.2fr) minmax(260px, 0.8fr); gap: 16px; margin-top: 16px"
+          style="display: grid; grid-template-columns: minmax(280px, 1fr) minmax(260px, 1fr); gap: 16px; margin-top: 16px"
         >
           <section
             class="card"
@@ -293,6 +382,8 @@ export function renderCloudAuth(
           ><button class="btn">稍后补充资料</button><button class="btn">切换账号</button>
         </div>
       </section>
+
+      ${renderMockNotice()}
     </div>
   `;
 }

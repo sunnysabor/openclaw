@@ -262,6 +262,7 @@ export type AppViewState = {
   cloudDeskSnapshot: CloudDeskSnapshot;
   cloudDeskLoading: boolean;
   cloudDeskError: string | null;
+  pendingCloudDeskRedirectTab: Tab | null;
   cloudDeskSettingsDraft: CloudDeskSettings;
   cloudDeskSettingsMessage: { kind: "success" | "error"; text: string } | null;
   loadCloudDeskSnapshot: () => Promise<void>;

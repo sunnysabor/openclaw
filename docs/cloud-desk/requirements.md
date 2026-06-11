@@ -1,8 +1,27 @@
 # 龙虾工作台 / CLAW-DESK 需求澄清文档
 
-本文是 龙虾工作台 当前唯一的需求主文档。
+本文不是当前仓库唯一的需求来源，而是 `openclaw/docs/cloud-desk/` 目录下的 Cloud Desk 子项目需求文档。
 
-目标是把项目定位、MVP 范围、产品边界和开发优先级讲清楚。历史草案已删除；当前只维护 `README.md` 与本文，本文作为当前开发依据。
+文档分工如下：
+
+- `../../../AGENTS.md`
+  - 后续 agent 的阅读顺序、协作约束和文档同步规则入口。
+- `../../../需求澄清文档.md`
+  - 平台级主需求文档，定义整个平台方向、系统边界、核心对象、MVP 闭环和 `openclaw` / `new-api` 分工。
+- `./README.md`
+  - Cloud Desk 文档目录入口。
+- `./requirements.md`
+  - OpenClaw 子项目内 Cloud Desk 页面方向、页面范围、接口契约草案和二开优先级。
+- `./implemented.md`
+  - 当前代码已实现事实清单。
+
+因此，本文的定位是：
+
+- 面向 OpenClaw 子项目二开
+- 聚焦页面、前端交互、Cloud Desk UI 结构和接口契约
+- 不单独承担整个平台级需求定义
+
+如果后续任务涉及平台定位、设备云控、任务调度、WebSocket 中转、Token 中转站分工等平台级问题，应先回看 `../../../需求澄清文档.md`。
 
 ## 1. 一句话定位
 
@@ -965,9 +984,13 @@ P0 完成时，应满足：
 
 ### 17.5 修改文档时的规则
 
-- 当前只维护两个主文档：`README.md` 和 `docs/requirements.md`。
-- 如果需求变化，优先更新 `docs/requirements.md`。
-- README 只保留项目入口、当前阶段、MVP 摘要和开发位置，不展开过多细节。
+- 当前维护三个文档：
+  - `README.md`：目录入口和当前摘要。
+  - `requirements.md`：需求、边界、路线和后续规划。
+  - `implemented.md`：当前代码已落地能力清单。
+- 如果需求变化，优先更新 `requirements.md`。
+- 如果实现状态变化，优先同步 `implemented.md`，再检查本文第 18 节摘要是否需要更新。
+- README 只保留项目入口、当前阶段、MVP 摘要和文档索引，不展开过多细节。
 - 不新增分散需求文档，除非后续明确进入 API contract / 设计稿 / 开发任务拆分阶段。
 - 修改需求时要同步检查：MVP 范围、暂不做事项、验收标准、下一步落地建议是否仍一致。
 
@@ -976,8 +999,6 @@ P0 完成时，应满足：
 截至当前代码落地，P0 前端 mock 已经完成大部分“可见 + 可交互”目标。
 
 ### 18.1 已落地
-
-实际源码位置：`/home/jerry/vscodeproject/openclaw`。
 
 已完成：
 
@@ -1012,11 +1033,17 @@ P0 完成时，应满足：
     - app 启动时加载 snapshot。
     - 龙虾工作台 action 统一通过 `runCloudDeskAction()` 执行并刷新 state。
     - 页面渲染入口接收 state snapshot，避免页面各自散读 adapter。
-11. 已新增 龙虾工作台 smoke test：
+11. 已实现龙虾工作台受保护页面的登录拦截和登录后回跳：
+    - 未登录访问 `cloudAccount`、`cloudBilling`、`cloudRelay`、`cloudReconciliation` 时，先跳到 `cloudAuth`。
+    - 登录成功后，若存在待跳转目标页，则自动回到原目标页。
+    - 登录态失效或退出登录后，如果当前仍停留在受保护页面，会切回 `cloudAuth`。
+12. 已新增 龙虾工作台 smoke test：
     - `ui/src/ui/cloud-desk-navigation.test.ts`
     - `ui/src/ui/views/cloud-desk.render.test.ts`
-12. 已新增 `cloudDeskApi` adapter 行为测试，并覆盖 龙虾工作台 settings save/reset：
+13. 已新增 `cloudDeskApi` adapter 行为测试，并覆盖 龙虾工作台 settings save/reset：
     - `ui/src/ui/cloud-desk-api.test.ts`
+14. 已新增登录跳转行为测试：
+    - `ui/src/ui/app-settings.refresh-active-tab.node.test.ts`
 
 当前已验证：
 

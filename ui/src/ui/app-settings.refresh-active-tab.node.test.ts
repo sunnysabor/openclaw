@@ -629,3 +629,92 @@ describe("refreshActiveTab", () => {
     ).toBe(false);
   });
 });
+
+describe("setTab cloud desk auth flow", () => {
+  beforeEach(() => {
+    for (const fn of Object.values(mocks)) {
+      fn.mockReset();
+    }
+  });
+
+  it("redirects protected cloud desk tabs to cloudAuth while logged out", () => {
+    const host = {
+      ...createHost(),
+      cloudDeskSnapshot: { account: { status: "inactive" } },
+      pendingCloudDeskRedirectTab: null,
+    };
+
+    setTab(host as never, "cloudAccount");
+
+    expect(host.tab).toBe("cloudAuth");
+    expect(host.pendingCloudDeskRedirectTab).toBe("cloudAccount");
+  });
+
+  it("redirects regular control tabs to cloudAuth while logged out", () => {
+    const host = {
+      ...createHost(),
+      cloudDeskSnapshot: { account: { status: "inactive" } },
+      pendingCloudDeskRedirectTab: null,
+    };
+
+    setTab(host as never, "chat");
+
+    expect(host.tab).toBe("cloudAuth");
+    expect(host.pendingCloudDeskRedirectTab).toBe("chat");
+  });
+
+  it("keeps protected cloud desk tabs accessible while logged in", () => {
+    const host = {
+      ...createHost(),
+      cloudDeskSnapshot: { account: { status: "active" } },
+      pendingCloudDeskRedirectTab: null,
+    };
+
+    setTab(host as never, "cloudAccount");
+
+    expect(host.tab).toBe("cloudAccount");
+    expect(host.pendingCloudDeskRedirectTab).toBeNull();
+  });
+
+  it("redirects cloudAuth to the pending cloud desk target after login", () => {
+    const host = {
+      ...createHost(),
+      tab: "cloudAuth",
+      cloudDeskSnapshot: { account: { status: "active" } },
+      pendingCloudDeskRedirectTab: "cloudRelay",
+    };
+
+    setTab(host as never, "cloudAuth");
+
+    expect(host.tab).toBe("cloudRelay");
+    expect(host.pendingCloudDeskRedirectTab).toBeNull();
+  });
+
+  it("redirects cloudAuth to overview after login when there is no pending target", () => {
+    const host = {
+      ...createHost(),
+      tab: "cloudAuth",
+      cloudDeskSnapshot: { account: { status: "active" } },
+      pendingCloudDeskRedirectTab: null,
+    };
+
+    setTab(host as never, "cloudAuth");
+
+    expect(host.tab).toBe("overview");
+    expect(host.pendingCloudDeskRedirectTab).toBeNull();
+  });
+
+  it("redirects cloudAuth back to the requested regular control tab after login", () => {
+    const host = {
+      ...createHost(),
+      tab: "cloudAuth",
+      cloudDeskSnapshot: { account: { status: "active" } },
+      pendingCloudDeskRedirectTab: "chat",
+    };
+
+    setTab(host as never, "cloudAuth");
+
+    expect(host.tab).toBe("chat");
+    expect(host.pendingCloudDeskRedirectTab).toBeNull();
+  });
+});

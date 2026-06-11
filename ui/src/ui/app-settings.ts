@@ -112,6 +112,8 @@ type SettingsHost = {
   pendingGatewayUrl?: string | null;
   systemThemeCleanup?: (() => void) | null;
   pendingGatewayToken?: string | null;
+  cloudDeskSnapshot?: { account?: { status?: "active" | "inactive" | "suspended" } } | null;
+  pendingCloudDeskRedirectTab?: Tab | null;
   requestUpdate?: () => void;
   updateComplete?: Promise<unknown>;
   controlUiRefreshSeq?: number;
@@ -333,7 +335,11 @@ export function applySettingsFromUrl(host: SettingsHost) {
 }
 
 export function setTab(host: SettingsHost, next: Tab) {
-  applyTabSelection(host, next, { refreshPolicy: "always", syncUrl: true });
+  applyTabSelection(host, next, {
+    refreshPolicy: "always",
+    syncUrl: true,
+    storeCloudDeskIntent: next !== "cloudAuth",
+  });
 }
 
 function applyThemeTransition(
@@ -634,9 +640,9 @@ export function syncTabWithLocation(host: SettingsHost, replace: boolean) {
   if (typeof window === "undefined") {
     return;
   }
-  const resolved = tabFromPath(window.location.pathname, host.basePath) ?? "chat";
+  const resolved = tabFromPath(window.location.pathname, host.basePath) ?? "cloudAuth";
   setTabFromRoute(host, resolved);
-  syncUrlWithTab(host, resolved, replace);
+  syncUrlWithTab(host, host.tab, replace);
 }
 
 export function onPopState(host: SettingsHost) {
@@ -658,7 +664,10 @@ export function onPopState(host: SettingsHost) {
 }
 
 export function setTabFromRoute(host: SettingsHost, next: Tab) {
-  applyTabSelection(host, next, { refreshPolicy: "connected" });
+  applyTabSelection(host, next, {
+    refreshPolicy: "connected",
+    storeCloudDeskIntent: next !== "cloudAuth",
+  });
 }
 
 function clearPendingSessionsChangedReload(host: SettingsHost) {
@@ -683,8 +692,13 @@ function updateBrowserHistory(url: URL, replace: boolean) {
 function applyTabSelection(
   host: SettingsHost,
   next: Tab,
-  options: { refreshPolicy: "always" | "connected"; syncUrl?: boolean },
+  options: {
+    refreshPolicy: "always" | "connected";
+    syncUrl?: boolean;
+    storeCloudDeskIntent?: boolean;
+  },
 ) {
+  next = resolveCloudDeskTab(host, next, options.storeCloudDeskIntent ?? false);
   const prev = host.tab;
   host.tab = next;
   if (prev !== next) {
@@ -717,6 +731,36 @@ function applyTabSelection(
   if (options.syncUrl) {
     syncUrlWithTab(host, next, false);
   }
+}
+
+function requiresCloudDeskLogin(tab: Tab): boolean {
+  return tab !== "cloudAuth";
+}
+
+function isCloudDeskLoggedIn(host: SettingsHost): boolean {
+  if (!host.cloudDeskSnapshot?.account) {
+    return true;
+  }
+  return host.cloudDeskSnapshot.account.status === "active";
+}
+
+function resolveCloudDeskTab(host: SettingsHost, next: Tab, storeIntent: boolean): Tab {
+  const loggedIn = isCloudDeskLoggedIn(host);
+  if (requiresCloudDeskLogin(next) && !loggedIn) {
+    if (storeIntent) {
+      host.pendingCloudDeskRedirectTab = next;
+    }
+    return "cloudAuth";
+  }
+  if (next === "cloudAuth" && loggedIn) {
+    const redirect = host.pendingCloudDeskRedirectTab;
+    host.pendingCloudDeskRedirectTab = null;
+    return redirect && redirect !== "cloudAuth" ? redirect : "overview";
+  }
+  if (next !== "cloudAuth") {
+    host.pendingCloudDeskRedirectTab = null;
+  }
+  return next;
 }
 
 export function syncUrlWithTab(host: SettingsHost, tab: Tab, replace: boolean) {
